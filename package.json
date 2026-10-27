@@ -1,0 +1,16 @@
+{
+  "name": "infratrack-desktop",
+  "version": "1.0.0",
+  "description": "InfraTrack - Campus Maintenance Reporting System (Desktop)",
+  "main": "main.js",
+  "scripts": {
+    "start": "InfraTrack.bat",
+    "dev": "InfraTrack.bat --dev",
+    "backend": "mvn -f backend/pom.xml spring-boot:run"
+  },
+  "author": "InfraTrack",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}

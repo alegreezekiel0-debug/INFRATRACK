@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHINMA Education - Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .portal-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        
+        .left-panel {
+            flex: 1;
+            background: var(--bg-lavender);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        
+        .geo-shapes {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .geo-shape {
+            position: absolute;
+            border-radius: 4px;
+        }
+
+        .geo-1 {
+            width: 180px;
+            height: 260px;
+            background: linear-gradient(135deg, #d4d4e8 0%, #b8b8d4 100%);
+            top: -30px;
+            left: -50px;
+            transform: rotate(-12deg);
+            opacity: 0.7;
+        }
+
+        .geo-2 {
+            width: 140px;
+            height: 200px;
+            background: linear-gradient(135deg, #c4c4e0 0%, #a0a0cc 100%);
+            top: 8%;
+            right: 15%;
+            transform: rotate(8deg);
+            opacity: 0.6;
+        }
+
+        .geo-3 {
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(135deg, #3068A8 0%, #255a91 100%);
+            bottom: -40px;
+            right: -60px;
+            transform: rotate(-15deg);
+            opacity: 0.85;
+        }
+
+        .geo-4 {
+            width: 100px;
+            height: 150px;
+            background: linear-gradient(135deg, #e0e0f0 0%, #c8c8e0 100%);
+            bottom: 20%;
+            left: 5%;
+            transform: rotate(18deg);
+            opacity: 0.5;
+        }
+
+        .geo-5 {
+            width: 80px;
+            height: 110px;
+            background: linear-gradient(135deg, #4080c0 0%, #3068A8 100%);
+            top: 55%;
+            left: 40%;
+            transform: rotate(-20deg);
+            opacity: 0.6;
+        }
+
+        .geo-6 {
+            width: 60px;
+            height: 85px;
+            background: linear-gradient(135deg, #d0d0e8 0%, #b0b0d0 100%);
+            top: 30%;
+            left: 15%;
+            transform: rotate(25deg);
+            opacity: 0.4;
+        }
+
+        
+        .left-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .school-seal {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 24px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--phinma-gold);
+        }
+
+        .school-seal svg {
+            width: 100px;
+            height: 100px;
+        }
+
+        .school-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .school-address {
+            font-size: 14px;
+            color: var(--text-gray);
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        
+        .dpo-badge {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--phinma-blue);
+            z-index: 2;
+        }
+
+        .dpo-badge svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        
+        .right-panel {
+            width: 520px;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 50px;
+            position: relative;
+        }
+
+        
+        .portal-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .portal-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-logo-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .portal-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-logo-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .portal-logo-tagline {
+            font-size: 9px;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .signin-heading {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: 28px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .signin-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--phinma-blue);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: #e53e3e;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 44px 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text-dark);
+            background: #f7fafc;
+            transition: all 0.2s;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--phinma-blue);
+            box-shadow: 0 0 0 3px rgba(48, 104, 168, 0.1);
+            background: var(--white);
+        }
+
+        .input-wrapper input::placeholder {
+            color: var(--text-light);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-icon:hover {
+            color: var(--text-gray);
+        }
+
+        
+        .cloudflare-verify {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background: #f7fafc;
+        }
+
+        .cloudflare-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cloudflare-check {
+            width: 24px;
+            height: 24px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .cloudflare-check svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .cloudflare-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .cloudflare-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .cloudflare-logo span {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-gray);
+            letter-spacing: 0.5px;
+        }
+
+        .cloudflare-logo small {
+            font-size: 9px;
+            color: var(--text-light);
+        }
+
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary {
+            background: var(--phinma-blue);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 15px rgba(48, 104, 168, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--phinma-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(48, 104, 168, 0.4);
+        }
+
+        .btn-google {
+            background: var(--white);
+            color: var(--text-dark);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-google:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .btn-google svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        
+        .forgot-link {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .forgot-link a {
+            font-size: 13px;
+            color: var(--phinma-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .alert-error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: #276749;
+            border: 1px solid #9ae6b4;
+        }
+
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal p {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 16px;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: var(--phinma-blue);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-actions .btn {
+            margin-bottom: 0;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--text-dark);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        
+        @media (max-width: 900px) {
+            .portal-container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                min-height: 280px;
+                padding: 30px;
+            }
+
+            .school-seal {
+                width: 100px;
+                height: 100px;
+            }
+
+            .school-seal svg {
+                width: 70px;
+                height: 70px;
+            }
+
+            .school-name {
+                font-size: 20px;
+            }
+
+            .school-address {
+                font-size: 12px;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .portal-logo {
+                margin-bottom: 24px;
+            }
+
+            .login-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .left-panel {
+                min-height: 220px;
+            }
+
+            .geo-3 {
+                width: 120px;
+                height: 170px;
+            }
+
+            .dpo-badge {
+                width: 60px;
+                height: 60px;
+                bottom: 15px;
+                left: 15px;
+            }
+
+            .dpo-badge svg {
+                width: 45px;
+                height: 45px;
+            }
+
+            .login-card {
+                padding: 24px 20px;
+            }
+
+            .signin-heading {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        
+        <div class="left-panel">
+            <div class="geo-shapes">
+                <div class="geo-shape geo-1"></div>
+                <div class="geo-shape geo-2"></div>
+                <div class="geo-shape geo-3"></div>
+                <div class="geo-shape geo-4"></div>
+                <div class="geo-shape geo-5"></div>
+                <div class="geo-shape geo-6"></div>
+            </div>
+            <div class="left-content">
+                <div class="school-seal">
+                    
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="48" stroke="#c8a951" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="42" stroke="#1a5c2a" stroke-width="1"/>
+                        <text x="50" y="22" text-anchor="middle" font-size="8" fill="#1a5c2a" font-weight="700">SAINT JUDE COLLEGE</text>
+                        <text x="50" y="75" text-anchor="middle" font-size="6" fill="#1a5c2a">MANILA</text>
+                        <path d="M50 30 L55 45 L70 45 L58 54 L62 68 L50 59 L38 68 L42 54 L30 45 L45 45 Z" fill="#c8a951"/>
+                        <text x="50" y="50" text-anchor="middle" font-size="12" fill="#1a5c2a" font-weight="700">SJC</text>
+                    </svg>
+                </div>
+                <h1 class="school-name">Saint Jude College Manila</h1>
+                <p class="school-address">Dimasalang cor. Don Quijote St, Sampaloc, Manila, 1008 Metro Manila</p>
+            </div>
+            <div class="dpo-badge">
+                
+                <svg viewBox="0 0 60 60" fill="none">
+                    <circle cx="30" cy="30" r="28" stroke="#3068A8" stroke-width="2"/>
+                    <text x="30" y="26" text-anchor="middle" font-size="7" fill="#3068A8" font-weight="700">DPO/DPS</text>
+                    <rect x="18" y="30" width="24" height="12" rx="2" fill="#22c55e"/>
+                    <text x="30" y="39" text-anchor="middle" font-size="6" fill="#fff" font-weight="700">REGISTERED</text>
+                </svg>
+            </div>
+        </div>
+
+        
+        <div class="right-panel">
+            <div class="portal-logo">
+                <div class="portal-logo-icon">
+                    
+                    <svg viewBox="0 0 35 35" fill="none">
+                        <circle cx="17.5" cy="17.5" r="16" stroke="#3068A8" stroke-width="2"/>
+                        <path d="M10 25 L17.5 8 L25 25 Z" fill="#3068A8" opacity="0.8"/>
+                        <circle cx="17.5" cy="18" r="4" fill="#c8a951"/>
+                    </svg>
+                </div>
+                <div class="portal-logo-text">
+                    <span class="portal-logo-name">PHINMA EDUCATION</span>
+                    <span class="portal-logo-tagline">Making Lives Better Through Education</span>
+                </div>
+            </div>
+
+            <div class="login-card">
+                <h2 class="signin-heading">Sign In</h2>
+
+                <div id="loginAlert"></div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <input type="text" id="username" placeholder="Enter your username" required>
+                            <span class="input-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <span class="input-icon" id="togglePassword" onclick="togglePassword()">
+                                <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="cloudflare-verify">
+                        <div class="cloudflare-left">
+                            <div class="cloudflare-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span class="cloudflare-text">Success!</span>
+                        </div>
+                        <div class="cloudflare-logo">
+                            <span>CLOUDFLARE</span>
+                            <small>Privacy &middot; Help</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                        Sign In
+                    </button>
+
+                    <button type="button" class="btn btn-google" onclick="googleSignIn()">
+                        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        Sign in with Google
+                    </button>
+
+                    <div class="forgot-link">
+                        <a href="#" onclick="openForgotModal(); return false;">Forgot Password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal-overlay" id="forgotModal">
+        <div class="modal">
+            <h3>Reset Password</h3>
+            <p>Enter your email address and we'll send you a link to reset your password.</p>
+            <input type="email" id="resetEmail" placeholder="Enter your email address">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeForgotModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="sendResetLink()">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('eyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        }
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const alertBox = document.getElementById('loginAlert');
+
+            if (!username || !password) {
+                alertBox.innerHTML = '<div class="alert alert-error">Please fill in all required fields.</div>';
+                return;
+            }
+            if (username && password) {
+                alertBox.innerHTML = '<div class="alert alert-success">Signing in as <strong>' + escapeHtml(username) + '</strong>... (Demo mode — integrate with your authentication system)</div>';
+            }
+        });
+        function googleSignIn() {
+            const alertBox = document.getElementById('loginAlert');
+            alertBox.innerHTML = '<div class="alert alert-success">Google Sign-In integration placeholder — Configure OAuth 2.0 credentials in your Google Cloud Console to enable this feature.</div>';
+        }
+        function openForgotModal() {
+            document.getElementById('forgotModal').classList.add('active');
+        }
+
+        function closeForgotModal() {
+            document.getElementById('forgotModal').classList.remove('active');
+            document.getElementById('resetEmail').value = '';
+        }
+
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            alert('Password reset link sent to: ' + email);
+            closeForgotModal();
+        }
+        document.getElementById('forgotModal').addEventListener('click', function(e) {
+            if (e.target === this) closeForgotModal();
+        });
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

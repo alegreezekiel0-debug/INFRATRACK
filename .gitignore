@@ -1,0 +1,17 @@
+node_modules/
+backend/target/
+mmm/node_modules/
+.vscode/
+.env
+.env.*
+!.env.example
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.zip
+Thumbs.db
+Desktop.ini
+
+# Older prototype kept alongside the active desktop project
+/mmm/

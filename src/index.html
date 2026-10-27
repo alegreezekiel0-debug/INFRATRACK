@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfraTrack - Campus Maintenance Reporting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div id="authPages">
+        
+        <div id="loginPage" class="auth-page">
+            <div class="auth-particles">
+                <div class="auth-particle auth-particle-1"></div>
+                <div class="auth-particle auth-particle-2"></div>
+                <div class="auth-particle auth-particle-3"></div>
+                <div class="auth-particle auth-particle-4"></div>
+                <div class="auth-particle auth-particle-5"></div>
+                <div class="auth-particle auth-particle-6"></div>
+                <div class="auth-particle auth-particle-7"></div>
+                <div class="auth-particle auth-particle-8"></div>
+            </div>
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-logo">
+                        <img src="assets/logo.png" alt="InfraTrack Logo" width="100" height="100">
+                    </div>
+                    <h1 class="auth-title">InfraTrack</h1>
+                    <h2 class="auth-heading">Log in</h2>
+                    <div id="loginError" class="alert alert-error" style="display:none;"></div>
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <input type="email" id="loginEmail" placeholder="Email Address" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="loginPassword" placeholder="Password" required class="form-input">
+                        </div>
+                        <div class="form-forgot">
+                            <a href="#" onclick="showPage('supportPage')">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </form>
+                    <p class="auth-footer">Don't have an account? <a href="#" onclick="showPage('registerPage')">Sign up</a></p>
+                </div>
+            </div>
+            <div class="auth-branding-text">
+                <p class="auth-branding-tagline">Campus Maintenance Reporting</p>
+                <h1 class="auth-branding-headline">
+                    <span class="headline-dark">Report it.</span>
+                    <span class="headline-gray">Track it.</span>
+                    <span class="headline-dark">Fix it.</span>
+                </h1>
+                <p class="auth-branding-desc">InfraTrack makes it easier for students to report campus maintenance issues and track their progress until they are resolved.</p>
+            </div>
+        </div>
+
+        
+        <div id="registerPage" class="auth-page" style="display:none;">
+            <div class="auth-particles">
+                <div class="auth-particle auth-particle-1"></div>
+                <div class="auth-particle auth-particle-2"></div>
+                <div class="auth-particle auth-particle-3"></div>
+                <div class="auth-particle auth-particle-4"></div>
+                <div class="auth-particle auth-particle-5"></div>
+                <div class="auth-particle auth-particle-6"></div>
+                <div class="auth-particle auth-particle-7"></div>
+                <div class="auth-particle auth-particle-8"></div>
+            </div>
+            <div class="auth-container auth-container-register">
+                <div class="auth-card">
+                    <div class="auth-logo">
+                        <img src="assets/logo.png" alt="InfraTrack Logo" width="100" height="100">
+                    </div>
+                    <h1 class="auth-title">InfraTrack</h1>
+                    <p class="auth-subtitle">Create your account!</p>
+                    <h2 class="auth-heading">Sign Up</h2>
+                    <div id="registerError" class="alert alert-error" style="display:none;"></div>
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <input type="text" id="regName" placeholder="Full Name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regStudentId" placeholder="Student ID" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="regEmail" placeholder="Email Address" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="regPassword" placeholder="Password" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required class="form-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </form>
+                    <p class="auth-footer">Already have an account? <a href="#" onclick="showPage('loginPage')">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="mainApp" style="display:none;">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <img src="assets/logo.png" alt="InfraTrack Logo" width="36" height="36">
+                <span class="brand-name">InfraTrack</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="report" id="studentReportNavItem" onclick="navigateTo('report')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Report an Issue</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports" id="studentReportsNavItem" onclick="navigateTo('reports')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span>My Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-page="activity-log" id="adminActivityNavItem" style="display:none;" onclick="navigateTo('activity-log')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>Activity Log</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports-analytics" id="adminAnalyticsNavItem" style="display:none;" onclick="navigateTo('reports-analytics')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/><path d="M19 9h-5"/><path d="M19 9v5"/></svg>
+                    <span>Reports &amp; Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-page="faq" onclick="navigateTo('faq')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>FAQs</span>
+                </a>
+                <a href="#" class="nav-item" data-page="admin" id="adminNavItem" style="display:none;" onclick="navigateTo('admin')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Admin Panel</span>
+                </a>
+                <a href="#" class="nav-item" data-page="support" onclick="navigateTo('support')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                    <span>Contact Support</span>
+                </a>
+            </nav>
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name" id="sidebarUserName">User</span>
+                    <span class="profile-id" id="sidebarUserId">ID</span>
+                    <span class="profile-role" id="sidebarUserRole">Student</span>
+                </div>
+                <button class="logout-btn" onclick="logout()" title="Log out">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        
+        <div class="main-content">
+            
+            <div class="top-header">
+                <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="notification-btn" aria-label="Notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    </button>
+                    <span class="welcome-text" id="welcomeText">Welcome, User!</span>
+                    <div class="header-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="content-area">
+                
+                <div id="dashboardPage" class="page-content">
+                    <div class="welcome-banner">
+                        <h2 id="dashboardWelcome">Welcome Back, User!</h2>
+                        <p>Help us keep our campus safe, clean, and functional.<br>Report any issue you see around the campus.</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Reports</span>
+                                <span class="stat-value" id="statTotal">0</span>
+                                <span class="stat-sub">All time</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-orange">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Pending</span>
+                                <span class="stat-value" id="statPending">0</span>
+                                <span class="stat-sub">Awaiting review</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Ongoing</span>
+                                <span class="stat-value" id="statInProgress">0</span>
+                                <span class="stat-sub">Work in progress</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-purple">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Done</span>
+                                <span class="stat-value" id="statResolved">0</span>
+                                <span class="stat-sub">Successfully fixed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-reports">
+                        <div class="section-header">
+                            <h3>Recent Reports</h3>
+                            <a href="#" class="btn btn-outline" onclick="navigateTo('reports')">View All</a>
+                        </div>
+                        <div class="reports-table" id="recentReportsTable">
+                            <div class="empty-state">
+                                <p>No reports yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="reportPage" class="page-content" style="display:none;">
+                    <div class="page-header">
+                        <button class="back-btn" onclick="navigateTo('dashboard')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        </button>
+                        <div>
+                            <h2>Report an Issue</h2>
+                            <p>Help us keep our campus safe, clean, and functional.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <form id="reportForm">
+                            <div class="form-group">
+                                <label for="issueTitle">Issue Title</label>
+                                <input type="text" id="issueTitle" class="form-input" placeholder="e.g. Leaking Aircon, broken chair, unusual noise in computer, etc." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="issueLocation">Location</label>
+                                <select id="issueLocation" class="form-input" required>
+                                    <option value="">Select a location</option>
+                                    <option value="DH 204">DH 204</option>
+                                    <option value="DH 203">DH 203</option>
+                                    <option value="DH 602">DH 602</option>
+                                    <option value="DH 3rd Floor">DH 3rd Floor</option>
+                                    <option value="PH 701">PH 701</option>
+                                    <option value="Cafeteria">Cafeteria</option>
+                                    <option value="Library">Library</option>
+                                    <option value="Hallway">Hallway</option>
+                                    <option value="Comfort Room">Comfort Room</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="issueDescription">Description</label>
+                                <textarea id="issueDescription" class="form-textarea" rows="4" placeholder="Please provide more details about the issue..." maxlength="500" required></textarea>
+                                <span class="char-count"><span id="charCount">0</span>/500</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Photo (Optional)</label>
+                                <div class="file-upload" id="fileUploadArea">
+                                    <div id="uploadPlaceholder">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                        <div class="upload-title">Upload photo (Optional)</div>
+                                        <div class="upload-sub">Drop your file here or click to upload</div>
+                                    </div>
+                                    <div id="uploadPreview" style="display:none;">
+                                        <div class="upload-preview">
+                                            <img id="previewImage" src="" alt="Preview">
+                                            <button type="button" class="remove-file" id="removeFile">&times;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Submit Report</button>
+                        </form>
+                    </div>
+                </div>
+
+                
+                <div id="reportsPage" class="page-content" style="display:none;">
+                    <div class="page-header">
+                        <button class="back-btn" onclick="navigateTo('dashboard')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        </button>
+                        <div>
+                            <h2>My Reports</h2>
+                            <p>View the details of your report and track it's progress.</p>
+                        </div>
+                    </div>
+                    <div class="card empty-card" id="reportsEmptyState">
+                        <div class="empty-state">
+                            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            <h3>No Reports Yet</h3>
+                            <p>You haven't submitted any reports.<br>When you do, they will appear here.</p>
+                            <button class="btn btn-primary" onclick="navigateTo('report')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                Create a Report
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card" id="reportsListCard" style="display:none;">
+                        <div class="reports-list" id="reportsList"></div>
+                    </div>
+                </div>
+
+                
+                <div id="reportDetailsPage" class="page-content" style="display:none;">
+                    <div class="page-header">
+                        <button class="back-btn" onclick="navigateTo('reports')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        </button>
+                        <div>
+                            <h2>Report Details</h2>
+                            <p>View the details of your report and track it's progress.</p>
+                        </div>
+                        <span class="status-badge" id="detailsStatus">Pending</span>
+                    </div>
+                    <div class="details-grid">
+                        <div class="card details-main">
+                            <div class="details-title-row">
+                                <div class="details-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                </div>
+                                <div>
+                                    <h3 id="detailsTitle">Report Title</h3>
+                                    <span class="details-subtitle" id="detailsLocation">Location</span>
+                                </div>
+                            </div>
+                            <div class="details-section">
+                                <h4>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    Description
+                                </h4>
+                                <p id="detailsDescription">Description text</p>
+                            </div>
+                            <div class="details-section" id="detailsPhotoSection">
+                                <h4>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                    Photo
+                                </h4>
+                                <img id="detailsPhoto" class="details-photo" src="" alt="Report photo">
+                            </div>
+                            <div class="comment-section">
+                                <h4>Add a Comment</h4>
+                                <div class="form-group">
+                                    <input type="text" id="commentInput" class="form-input" placeholder="Type your comment...">
+                                </div>
+                                <button class="btn btn-primary" onclick="addComment()">Add Comment</button>
+                            </div>
+                            <div class="comments-list" id="commentsList" style="display:none;">
+                                <h4>Comments</h4>
+                                <div id="commentsContainer"></div>
+                            </div>
+                        </div>
+                        <div class="card details-sidebar">
+                            <h4>Report Information</h4>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <div>
+                                        <span class="info-label">Location</span>
+                                        <span class="info-value" id="infoLocation">DH 3rd Floor</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    <div>
+                                        <span class="info-label">Issue</span>
+                                        <span class="info-value" id="infoIssue">Leakage</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    <div>
+                                        <span class="info-label">Reported on</span>
+                                        <span class="info-value" id="infoDate">Sept 3, 2026</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <div>
+                                        <span class="info-label">Submitted By</span>
+                                        <span class="info-value" id="infoSubmitter">Student</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" onclick="navigateTo('report')">Add Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="faqPage" class="page-content" style="display:none;">
+                    <div class="page-header-centered">
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Find answers to common questions about InfraTrack.</p>
+                    </div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)">
+                                <span>How do I report an issue?</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Click on "Report an Issue" in the sidebar, fill out the form with the issue details, location, and description, then submit.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)">
+                                <span>How long does it take to resolve an issue?</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Resolution time depends on the severity and type of issue. You can track the status of your report in the "My Reports" section.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)">
+                                <span>Can I add photos to my report?</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes! You can upload a photo of the issue when submitting your report. This helps the maintenance team understand the problem better.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)">
+                                <span>How do I track my report status?</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Go to "My Reports" in the sidebar to see all your submitted reports and their current status (Pending, Ongoing, or Done).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="adminPage" class="page-content" style="display:none;">
+                    <div class="page-header-centered">
+                        <h2>Admin Panel</h2>
+                        <p>Manage all reports, update statuses, and monitor the system.</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Reports</span>
+                                <span class="stat-value" id="adminStatTotal">0</span>
+                                <span class="stat-sub">All users</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-orange">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Pending</span>
+                                <span class="stat-value" id="adminStatPending">0</span>
+                                <span class="stat-sub">Awaiting review</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Ongoing</span>
+                                <span class="stat-value" id="adminStatInProgress">0</span>
+                                <span class="stat-sub">Work in progress</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-purple">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Done</span>
+                                <span class="stat-value" id="adminStatResolved">0</span>
+                                <span class="stat-sub">Successfully fixed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="section-header">
+                            <h3>All Reports</h3>
+                            <select id="adminFilterStatus" class="form-input" style="width:auto;" onchange="loadAdminPanel()">
+                                <option value="">All Statuses</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Done">Done</option>
+                            </select>
+                        </div>
+                        <div class="reports-table" id="adminReportsTable">
+                            <div class="empty-state">
+                                <p>No reports found.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="activity-logPage" class="page-content" style="display:none;">
+                    <div class="page-header-centered">
+                        <h2>Activity Log</h2>
+                        <p>Review administrator actions across maintenance reports.</p>
+                    </div>
+                    <div class="card analytics-table-card">
+                        <div class="section-header"><h3>Recent Activity</h3></div>
+                        <div class="table-scroll">
+                            <table class="analytics-table">
+                                <thead><tr><th>Performed By</th><th>Action</th><th>Report</th><th>Date &amp; Time</th></tr></thead>
+                                <tbody id="activityLogTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="activityLogEmpty" class="empty-state" style="display:none;"><p>No administrator activity has been recorded yet.</p></div>
+                    </div>
+                </div>
+
+                <div id="reports-analyticsPage" class="page-content" style="display:none;">
+                    <div class="page-header-centered">
+                        <h2>Reports &amp; Analytics</h2>
+                        <p>Maintenance report volume, status, and resolution trends.</p>
+                    </div>
+                    <div class="stats-grid analytics-summary-grid">
+                        <div class="stat-card"><div class="stat-icon stat-icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/><path d="M14 2v6h6"/></svg></div><div class="stat-info"><span class="stat-label">Total Reports</span><span class="stat-value" id="analyticsTotal">0</span><span class="stat-sub">All submitted reports</span></div></div>
+                        <div class="stat-card"><div class="stat-icon stat-icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-info"><span class="stat-label">Pending</span><span class="stat-value" id="analyticsPending">0</span><span class="stat-sub">Awaiting review</span></div></div>
+                        <div class="stat-card"><div class="stat-icon stat-icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.7 6.3 3 3-9.2 9.2a2.1 2.1 0 0 1-3-3z"/><path d="m16 5 3 3"/></svg></div><div class="stat-info"><span class="stat-label">Ongoing</span><span class="stat-value" id="analyticsOngoing">0</span><span class="stat-sub">Currently being handled</span></div></div>
+                        <div class="stat-card"><div class="stat-icon stat-icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg></div><div class="stat-info"><span class="stat-label">Done</span><span class="stat-value" id="analyticsDone">0</span><span class="stat-sub">Successfully resolved</span></div></div>
+                        <div class="stat-card"><div class="stat-icon stat-icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg></div><div class="stat-info"><span class="stat-label">Resolution Rate</span><span class="stat-value" id="analyticsResolutionRate">0%</span><span class="stat-sub">Reports marked done</span></div></div>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="card analytics-card"><div class="section-header"><h3>Most Reported Problems</h3></div><div id="problemChart" class="chart-list"></div></div>
+                        <div class="card analytics-card"><div class="section-header"><h3>Report Status Distribution</h3></div><div class="status-chart-wrap"><div id="statusDonut" class="status-donut"><span id="statusDonutTotal">0</span></div><div id="statusLegend" class="status-legend"></div></div></div>
+                        <div class="card analytics-card"><div class="section-header"><h3>Monthly Resolution Rates</h3></div><p class="chart-caption">Done reports divided by reports submitted in each month.</p><div id="resolutionChart" class="chart-list"></div></div>
+                        <div class="card analytics-card"><div class="section-header"><h3>Maintenance Trends</h3></div><div class="chart-legend"><span><i class="legend-dot legend-submitted"></i>Submitted</span><span><i class="legend-dot legend-done"></i>Done</span></div><div id="trendChart" class="trend-chart"></div></div>
+                    </div>
+                </div>
+
+                
+                <div id="supportPage" class="page-content" style="display:none;">
+                    <div class="page-header-centered">
+                        <h2>Contact Support</h2>
+                        <p>Need help? Reach out to our support team.</p>
+                    </div>
+                    <div class="support-grid">
+                        <div class="card support-info">
+                            <h3>Get in Touch</h3>
+                            <div class="support-items">
+                                <div class="support-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    <div>
+                                        <span class="support-label">Email</span>
+                                        <span class="support-value">infratrack.sjc@gmail.com</span>
+                                    </div>
+                                </div>
+                                <div class="support-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <div>
+                                        <span class="support-label">Phone</span>
+                                        <span class="support-value">+63 969 567 4348</span>
+                                    </div>
+                                </div>
+                                <div class="support-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <div>
+                                        <span class="support-label">Office</span>
+                                        <span class="support-value">Admin Building, Room 101</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card support-form-card">
+                            <h3>Send a Message</h3>
+                            <form id="supportForm">
+                                <div class="form-group">
+                                    <input type="text" class="form-input" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-input" placeholder="Your Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-textarea" rows="4" placeholder="Your message..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
